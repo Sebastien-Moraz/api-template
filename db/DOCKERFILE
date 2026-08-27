@@ -1,0 +1,8 @@
+FROM mariadb:latest
+
+COPY mariadb.cnf /etc/mysql/conf.d/mariadb.cnf
+
+ENV MARIADB_ROOT_PASSWORD=bouteille
+ENV MARIADB_DATABASE=Koppa
+ENV MARIADB_USER=Koppa
+ENV MARIADB_PASSWORD=bouteille

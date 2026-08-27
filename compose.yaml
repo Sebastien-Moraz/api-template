@@ -1,0 +1,48 @@
+services:
+  redis:
+    build:
+      context: ./redis
+      dockerfile: DOCKERFILE
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - koppa
+
+  koppa:
+    build:
+      context: ./
+      dockerfile: DOCKERFILE
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app:z
+    networks:
+      - koppa
+    depends_on:
+      - redis
+      - mariadb
+    env_file:
+      - ./.env
+
+  mariadb:
+    build:
+      context: ./db
+      dockerfile: DOCKERFILE
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d:z
+    networks:
+      - koppa
+
+volumes:
+  redis_data:
+  koppa_data:
+  mariadb_data:
+
+networks:
+  koppa:
+    driver: bridge

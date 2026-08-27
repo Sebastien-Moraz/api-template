@@ -12,4 +12,24 @@ To start the development server run:
 bun run dev
 ```
 
+## Structure
+The project structure is as follows:
+```
+| src
+  | modules
+	| auth
+	  | index.ts (Elysia controller)
+	  | service.ts (service)
+	  | model.ts (model)
+	| user
+	  | index.ts (Elysia controller)
+	  | service.ts (service)
+	  | model.ts (model)
+  | utils
+	| a
+	  | index.ts
+	| b
+	  | index.ts
+```
+
 Open http://localhost:3000/ with your browser to see the result.
